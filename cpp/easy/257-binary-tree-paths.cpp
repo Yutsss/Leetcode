@@ -14,26 +14,18 @@ class Solution
 private:
   void helper(TreeNode *root, vector<string> &result, string path)
   {
+    if (root == nullptr)
+      return;
+
     path += to_string(root->val);
 
     if (root->left == nullptr && root->right == nullptr)
     {
       result.push_back(path);
     }
-    if (root->right != nullptr)
-    {
-      path += "->";
-      helper(root->right, result, path);
-      path.pop_back();
-      path.pop_back();
-    }
-    if (root->left != nullptr)
-    {
-      path += "->";
-      helper(root->left, result, path);
-      path.pop_back();
-      path.pop_back();
-    }
+    path += "->";
+    helper(root->right, result, path);
+    helper(root->left, result, path);
   }
 
 public:
